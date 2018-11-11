@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meetings</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">Meetings</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <%= link_to 'Home', root_path, class: 'nav-link' %>
+              </li>
+              <% if can?(:access, :rails_admin) %>
+                <li class="nav-item">
+                  <%= link_to 'Admin', rails_admin_path, class: 'nav-link' %>
+                </li>
+              <% end %>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <% if logged_in? %>
+                <%= link_to current_user.name, edit_user_path(current_user), class: 'nav-link' %>
+                <%= link_to('Logout', logout_path, class: 'nav-link')%>
+              <% else %>
+                <%= link_to('Login', '/auth/auth0', class: 'nav-link') %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <%= yield %>
+    </main>
+  </body>
+</html>
