@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def page_header(text)
-    content_tag :h1, text, class: 'display-1'
+    content_tag :h1, text, class: 'display-3'
   end
 
   def format_date(date)
