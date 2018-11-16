@@ -3,6 +3,6 @@ class Meeting < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
 
   def self.upcoming
-    where('date >= now()::date')
+    where('date::date >= now()::date')
   end
 end
