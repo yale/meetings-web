@@ -1,4 +1,6 @@
 <%= page_header @meeting.name %>
+<% if current_user.admin? %>
 <%= image_tag(code_meeting_url(@meeting.id), class: 'qr') %>
+<% end %>
 <h2>Agenda</h2>
 <%= raw(@meeting.agenda) %>

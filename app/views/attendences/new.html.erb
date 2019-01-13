@@ -1,1 +1,13 @@
-New Attendence
+<%= page_header(@meeting.name) %>
+
+<%= form_for @attendence, html: { id: :attendence_form } do |f|  %>
+<%= f.submit "Check in", class: "btn btn-primary btn-lg btn-block" %>
+<% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.search.match(/check_in/)) {
+    document.getElementById('attendence_form').submit();
+  }
+})
+</script>

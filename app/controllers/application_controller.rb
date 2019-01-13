@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
 
   def restrict_access
-    redirect_to '/' unless logged_in?
+    unless logged_in?
+      session[:redirect_to] = request.fullpath
+      redirect_to '/auth/auth0' 
+    end
   end
 
   def current_user
@@ -11,5 +14,11 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     current_user != nil
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   end
 end

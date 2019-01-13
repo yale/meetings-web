@@ -7,9 +7,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(update_user_params)
+    first_time = !@user.filled_out_profile?
 
-    redirect_to root_path
+    @user.update!(update_user_params)
+
+    if first_time
+      redirect_to session[:redirect_to] || root_path
+    else
+      redirect_to root_path
+    end
   end
 
   private

@@ -12,7 +12,7 @@ class Auth0Controller < ApplicationController
       redirect_to edit_user_path(user.id) and return
     end
 
-    redirect_to root_path
+    redirect_to session[:redirect_to] || root_path
   end
 
   def failure

@@ -6,13 +6,7 @@ class MeetingsController < ApplicationController
   end
 
   def code
-    send_data(RQRCode::QRCode.new({
-      target: api_v1_scans_url,
-      data: {
-        user_id: current_user.id,
-        meeting_id: params.require(:id)
-      }
-    }.to_json).as_png(
+    send_data(RQRCode::QRCode.new(new_attendence_url(id: params.require(:id), check_in: true)).as_png(
       fill: 'white',
       color: 'black',
       border_modules: 0,
